@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -40,6 +41,9 @@ public class SearchTest {
         driver.findElement(By.id("search_query_top")).clear();
         driver.findElement(By.id("search_query_top")).sendKeys("Printed Summer Dress");
         driver.findElement(By.xpath("//*[@id=\"searchbox\"]/button")).click();
+
+        List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"center_column\"]/ul/li"));
+        Assert.assertEquals(elements.size(), 3);
 
         WebElement str = driver.findElement(By.xpath("//*[@id=\"center_column\"]/ul/li[1]/div/div[2]/h5/a"));
         Assert.assertThat(str.getText() , containsString("Printed Summer Dress"));
